@@ -5,8 +5,8 @@
       "command": "uvx",
       "args": ["workspace-mcp", "--tool-tier", "core"],
       "env": {
-        "GOOGLE_OAUTH_CLIENT_ID": "PASTE_YOUR_CLIENT_ID_HERE",
-        "GOOGLE_OAUTH_CLIENT_SECRET": "PASTE_YOUR_CLIENT_SECRET_HERE",
+        "GOOGLE_OAUTH_CLIENT_ID": "123456789-abcdefghijk.apps.googleusercontent.com",
+        "GOOGLE_OAUTH_CLIENT_SECRET": "GOCSPX-abcd1234efgh5678",
         "OAUTHLIB_INSECURE_TRANSPORT": "1"
       }
     }

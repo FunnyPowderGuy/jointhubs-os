@@ -244,6 +244,85 @@ Zmiana w `.vscode/mcp.json`:
 | MCP nie startuje | Sprawdź czy `uvx workspace-mcp --help` działa w terminalu |
 | Token wygasł | Usuń zapisany token i zautoryzuj ponownie |
 | Agent nie widzi MCP | Zrestartuj VS Code po zmianie `mcp.json` |
+| Credentials nie działają | Sprawdź sekcję **Weryfikacja credentials** poniżej |
+
+---
+
+## Weryfikacja credentials (checklista)
+
+Jeśli MCP nie startuje lub agent nie widzi Google Calendar, przejdź przez tę checklistę krok po kroku:
+
+### 1. Sprawdź czy plik `.vscode/mcp.json` istnieje
+
+```powershell
+ls .vscode/mcp.json
+```
+
+Jeśli **nie istnieje**, skopiuj example:
+```powershell
+cp .vscode/mcp.json.example .vscode/mcp.json
+```
+
+Następnie otwórz plik i zamień wartości placeholder na prawdziwe credentials.
+
+### 2. Sprawdź format credentials
+
+Otwórz `.vscode/mcp.json` i upewnij się, że:
+
+| Pole | Prawidłowy format |
+|------|------------------|
+| `GOOGLE_OAUTH_CLIENT_ID` | `123456789-abc...xyz.apps.googleusercontent.com` |
+| `GOOGLE_OAUTH_CLIENT_SECRET` | `GOCSPX-abcDEF...` |
+
+**Jeśli widzisz `YOUR_CLIENT_ID` lub `YOUR_CLIENT_SECRET` — credentials nie zostały wklejone.**
+
+### 3. Sprawdź czy `uv` jest zainstalowany
+
+```powershell
+uvx --version
+```
+
+Oczekiwany wynik: `uv X.Y.Z` lub podobny. Jeśli błąd:
+```powershell
+# Windows
+irm https://astral.sh/uv/install.ps1 | iex
+
+# macOS / Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Po instalacji zrestartuj terminal i VS Code.
+
+### 4. Uruchom MCP ręcznie (test)
+
+```powershell
+uvx workspace-mcp --help
+```
+
+Jeśli to działa, MCP jest zainstalowany poprawnie. Jeśli błąd — problem z instalacją `workspace-mcp`.
+
+### 5. Sprawdź OAuth consent screen — test users
+
+Przy pierwszym uruchomieniu Google wymaga, żebyś był na liście **Test Users**:
+
+1. Wejdź na https://console.cloud.google.com/
+2. **APIs & Services** → **OAuth consent screen**
+3. Sekcja **Test users** → sprawdź czy Twój email jest na liście
+4. Jeśli nie — kliknij **"+ Add Users"** i dodaj swój email
+
+### 6. Pierwsze logowanie
+
+Przy pierwszym użyciu przeglądrka otworzy stronę OAuth Google:
+1. Zaloguj się emailem z listy test users
+2. Pojawi się ostrzeżenie "This app isn't verified" — to normalne (to Twoja własna aplikacja)
+3. Kliknij **"Advanced"** → **"Go to Jointhubs MCP (unsafe)"**
+4. Kliknij **"Allow"** dla wymaganych uprawnień
+
+Po tym token zostaje zapisany lokalnie i kolejne sesje nie wymagają logowania.
+
+### 7. Zrestartuj VS Code
+
+Po każdej zmianie `mcp.json` lub po pierwszym OAuth — **zrestartuj VS Code całkowicie**.
 
 ---
 

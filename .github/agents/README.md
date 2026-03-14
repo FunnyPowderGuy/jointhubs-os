@@ -48,6 +48,7 @@ These are the currently shared, domain-specific agents that remain in the repo:
 |-------|---------|
 | [Travel Planner](travel.agent.md) | Travel research and trip planning |
 | [Investor](investor.agent.md) | Stock and investment research |
+| [Calendar](calendar.agent.md) | Sync changed lessons and schedule updates to Google Calendar |
 
 ## Local-Only Agents
 
